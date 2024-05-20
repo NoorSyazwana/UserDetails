@@ -1,0 +1,47 @@
+1. Create a new database
+CREATE TABLE [dbo].[tbUser](
+	[UserID] [bigint] IDENTITY(0,1) NOT NULL,
+	[UserName] [varchar](20) NOT NULL,
+	[UserNo] [int] NOT NULL,
+	[CreateDate] [datetime] NOT NULL
+) ON [PRIMARY]
+GO
+
+=================
+Stored procedure
+=================
+Add record
+----------
+CREATE PROCEDURE InsertUsers 
+@UserName varchar(20),
+@UserNo int
+AS
+INSERT INTO tbUser (UserName,UserNo,CreateDate) 
+VALUES (@UserName,@UserNo,GETDATE());
+
+Delete record
+-------------
+CREATE PROCEDURE DeleteUsers 
+@UserID bigint
+AS
+DELETE FROM tbUser WHERE UserID=@UserID
+
+Update record
+-------------
+CREATE PROCEDURE UpdateUsers 
+@UserID bigint,
+@UserName varchar(20),
+@UserNo int
+AS
+UPDATE tbUser SET UserName=@UserName, UserNo=@UserNo WHERE UserID=@UserID
+
+Select record
+-------------
+CREATE PROCEDURE [dbo].[SelectUsers] 
+AS
+SELECT * FROM tbUser ORDER BY UserID
+
+
+
+
+
